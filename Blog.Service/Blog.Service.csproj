@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ApplicationLayer\Blog.Domain.csproj" />
     <ProjectReference Include="..\Blog.Service.Abstraction\Blog.Service.Abstraction.csproj" />
   </ItemGroup>

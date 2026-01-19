@@ -1,4 +1,7 @@
 
+using Blog.Persistence.DbContexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace BlogApi
 {
     public class Program
@@ -13,6 +16,10 @@ namespace BlogApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<BlogDbContext>(opt =>
+            {
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("MainConnection"));
+            });
 
             var app = builder.Build();
 
