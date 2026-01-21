@@ -102,8 +102,8 @@ namespace Blog.Service
                 {
                     Id = c.Id,
                     Text = c.Text,
-                    PostId = post.Id
-                }).ToList()
+                    PostId = c.PostId
+                }).ToList() ?? Enumerable.Empty<CommentDto>().ToList()
             };
         }
 
