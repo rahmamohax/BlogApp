@@ -1,5 +1,7 @@
 
+using Blog.Domain.Contracts;
 using Blog.Persistence.DbContexts;
+using Blog.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApi
@@ -20,6 +22,11 @@ namespace BlogApi
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("MainConnection"));
             });
+
+            builder.Services.AddScoped<IPostRepository, PostRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
 
             var app = builder.Build();
 

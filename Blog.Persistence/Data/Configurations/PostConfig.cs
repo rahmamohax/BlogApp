@@ -16,8 +16,12 @@ namespace Blog.Persistence.Data.Configurations
             builder.Property(x => x.Title).HasMaxLength(100);
             builder.Property(x => x.Content).HasMaxLength(500);
             builder.Property(x => x.Status).HasConversion<string>();
-            builder.HasOne(x => x.Category).WithMany().HasForeignKey(x => x.CategoryId);
-            builder.HasMany(x => x.Comments).WithOne().HasForeignKey(x => x.PostId);
+            builder.HasOne(x => x.Category).WithMany(c => c.Posts).HasForeignKey(x => x.CategoryId);
+            builder.HasMany(x => x.Comments).WithOne(x => x.Post).HasForeignKey(x => x.PostId);
+            //builder.OwnsMany(x => x.Comments, add =>
+            //{
+            //    add.Property(x => x.)
+            //});
         }
     }
 }

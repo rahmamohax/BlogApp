@@ -17,7 +17,7 @@ namespace Blog.Domain.Entities
         public int CategoryId { get; set; }
         public Category Category { get; set; } = null!;
         public Status Status { get; set; } = Status.Draft;
-        public ICollection<Comment> Comments { get; set; } = [];
+        public ICollection<Comment>? Comments { get; set; } = [];
 
     }
 }
