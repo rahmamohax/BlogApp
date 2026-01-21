@@ -9,8 +9,8 @@ namespace Blog.Domain.Contracts
 {
     public interface ICommentRepository
     {
-        Task AddAsync(Comment comment);
+        Task<bool> AddAsync(Comment comment);
         Task<IEnumerable<Comment>> GetAllAsync(int postId);
-        void DeleteAsync(Comment comment);
+        Task<bool> DeleteAsync(Comment comment);
     }
 }

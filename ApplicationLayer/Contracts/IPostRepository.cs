@@ -9,9 +9,9 @@ namespace Blog.Domain.Contracts
 {
     public interface IPostRepository
     {
-        Task AddAsync(Post post);
-        void Update(Post post);
-        void Delete(Post post);
+        Task<bool> AddAsync(Post post);
+        Task<bool> Update(Post post);
+        Task<bool> Delete(Post post);
 
         Task<Post?> GetByIdAsync(int id);
         Task<IEnumerable<Post>> GetAllAsync();

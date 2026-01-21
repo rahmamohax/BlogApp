@@ -18,16 +18,16 @@ namespace Blog.Persistence.Repositories
         {
             this._dbContext = dbContext;
         }
-        public async Task CreateAsync(Category category)
+        public async Task<bool> CreateAsync(Category category)
         {
             await _dbContext.Categories.AddAsync(category);
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync() > 0;
         }
 
-        public async void DeleteAsync(Category category)
+        public async Task<bool> DeleteAsync(Category category)
         {
             _dbContext.Categories.Remove(category);
-            await _dbContext.SaveChangesAsync();
+           return await _dbContext.SaveChangesAsync() > 0;
 
         }
 

@@ -9,9 +9,9 @@ namespace Blog.Domain.Contracts
 {
     public interface ICategoryRepository
     {
-        Task CreateAsync(Category category);
+        Task<bool> CreateAsync(Category category);
         Task<IEnumerable<Category>> GetAllAsync();
-        void DeleteAsync(Category category);
+        Task<bool> DeleteAsync(Category category);
         Task<Category?> GetByIdAsync(int id);
 
         //Task<bool> HasPostsAsync(int categoryId); // will be a helper method in service implementation

@@ -18,16 +18,16 @@ namespace Blog.Persistence.Repositories
         {
             this._dbContext = dbContext;
         }
-        public async Task AddAsync(Comment comment)
+        public async Task<bool> AddAsync(Comment comment)
         {
             await _dbContext.Comments.AddAsync(comment);
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync() > 0;
         }
 
-        public async void DeleteAsync(Comment comment)
+        public async Task<bool> DeleteAsync(Comment comment)
         {
             _dbContext.Comments.Remove(comment);
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync() > 0;
         }
 
         public async Task<IEnumerable<Comment>> GetAllAsync(int postId)

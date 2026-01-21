@@ -15,16 +15,16 @@ namespace Blog.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task AddAsync(Post post)
+        public async Task<bool> AddAsync(Post post)
         {
             await _dbContext.Posts.AddAsync(post);
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync() > 0;
         }
 
-        public async Task Delete(Post post)
+        public async Task<bool> Delete(Post post)
         {
             _dbContext.Posts.Remove(post);
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync() > 0;
 
         }
 
@@ -38,10 +38,10 @@ namespace Blog.Persistence.Repositories
             return await _dbContext.Posts.FindAsync(id);
         }
 
-        public async void Update(Post post)
+        public async Task<bool> Update(Post post)
         {
             _dbContext.Posts.Update(post);
-            await _dbContext.SaveChangesAsync();
+           return await _dbContext.SaveChangesAsync() > 0;
 
         }
     }

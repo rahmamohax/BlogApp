@@ -25,7 +25,14 @@ namespace Blog.Service
                 CreatedAt = DateTime.UtcNow,
                 Status = Status.Published
             };
-            //var create = await _repository.AddAsync(postToCreate);
+            var create =  await _repository.AddAsync(postToCreate);
+            if (create)
+                return new PostDto
+                {
+                    Title = postDto.Title,
+                    
+                };
+
 
             //return postDto;
         }
