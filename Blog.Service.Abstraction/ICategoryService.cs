@@ -1,4 +1,4 @@
-﻿using Blog.Shared.DTOs;
+﻿using Blog.Shared.DTOs.CategoryDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +10,8 @@ namespace Blog.Service.Abstraction
     public interface ICategoryService
     {
         Task<IEnumerable<CategoryDto>> GetAllAsync();
-        Task<bool> CreateAsync(CategoryDto categoryDto);
-        Task DeleteAsync(int id);
+        Task<CategoryDto?> CreateAsync(CreateCategoryDto categoryDto);
+        Task<bool> DeleteAsync(int id);
 
     }
 }

@@ -1,4 +1,4 @@
-﻿using Blog.Domain.Contracts;
+using Blog.Domain.Contracts;
 using Blog.Domain.Entities;
 using Blog.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +38,14 @@ namespace Blog.Persistence.Repositories
 
         public async Task<Category?> GetByIdAsync(int id)
         {
-            return await _dbContext.Categories.FindAsync(id);
+            return await _dbContext.Categories
+                .Include(x=> x.Posts)
+                .FirstOrDefaultAsync(x=> x.Id == id);
+        }
+
+        public async Task<bool> HasPostsAsync(int categoryId)
+        {
+            return await _dbContext.Posts.AnyAsync(p => p.CategoryId == categoryId);
         }
     }
 }

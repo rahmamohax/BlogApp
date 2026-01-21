@@ -1,4 +1,4 @@
-﻿using Blog.Domain.Contracts;
+using Blog.Domain.Contracts;
 using Blog.Domain.Entities;
 using Blog.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
@@ -30,12 +30,17 @@ namespace Blog.Persistence.Repositories
 
         public async Task<IEnumerable<Post>> GetAllAsync()
         {
-            return await _dbContext.Posts.ToListAsync();
+            return await _dbContext.Posts
+                .Include(p => p.Category)
+                .ToListAsync();
         }
 
         public async Task<Post?> GetByIdAsync(int id)
         {
-            return await _dbContext.Posts.FindAsync(id);
+            return await _dbContext.Posts
+                .Include(p => p.Category)
+                .Include( p => p.Comments)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<bool> Update(Post post)

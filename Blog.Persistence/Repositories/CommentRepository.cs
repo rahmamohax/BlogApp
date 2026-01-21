@@ -34,5 +34,10 @@ namespace Blog.Persistence.Repositories
         {
             return await _dbContext.Comments.Where(x=> x.PostId == postId).ToListAsync();
         }
+
+        public async Task<Comment?> GetByIdAsync(int id)
+        {
+            return await _dbContext.Comments.FirstOrDefaultAsync(x=> x.Id == id);
+        }
     }
 }

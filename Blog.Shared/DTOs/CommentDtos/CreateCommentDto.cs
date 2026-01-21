@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blog.Shared.DTOs
+namespace Blog.Shared.DTOs.CommentDtos
 {
-    public class CommentDto
+    public class CreateCommentDto
     {
+        public string Text { get; set; } = null!;
     }
 }
