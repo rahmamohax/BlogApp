@@ -2,6 +2,8 @@
 using Blog.Domain.Contracts;
 using Blog.Persistence.DbContexts;
 using Blog.Persistence.Repositories;
+using Blog.Service;
+using Blog.Service.Abstraction;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApi
@@ -27,6 +29,9 @@ namespace BlogApi
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
+            builder.Services.AddScoped<IPostService, PostService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ICommentService, CommentService>();
 
             var app = builder.Build();
 

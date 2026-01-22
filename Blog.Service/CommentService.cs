@@ -17,10 +17,10 @@ namespace Blog.Service
             _postRepository = postRepository;
         }
 
-        public async Task<bool> AddAsync(int postId, CreateCommentDto commentDto)
+        public async Task<CommentDto?> AddAsync(int postId, CreateCommentDto commentDto)
         {
             var post = await _postRepository.GetByIdAsync(postId);
-            if (post is null || post.Status == Status.Archived) return false;
+            if (post is null || post.Status == Status.Archived) return null;
             var comment = new Comment
             {
                 PostId = postId,
@@ -28,7 +28,14 @@ namespace Blog.Service
                 CreatedAt = DateTime.Now,
                 Post = post,
             };
-            return await _repository.AddAsync(comment);
+            var add = await _repository.AddAsync(comment);
+            if(!add) return null;
+            return new CommentDto
+            {
+                PostId =comment.PostId,
+                Text = comment.Text,
+                Id = comment.Id
+            };
         }
 
         public async Task<bool> DeleteAsync(int id)
