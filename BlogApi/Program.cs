@@ -1,16 +1,18 @@
 
 using Blog.Domain.Contracts;
+using Blog.Persistence.Data.DataSeed;
 using Blog.Persistence.DbContexts;
 using Blog.Persistence.Repositories;
 using Blog.Service;
 using Blog.Service.Abstraction;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace BlogApi
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +35,20 @@ namespace BlogApi
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
 
+            builder.Services.AddScoped<IDataSeeder, DataSeeder>();
+
             var app = builder.Build();
+
+            #region Data Seeding
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<BlogDbContext>();
+                db.Database.Migrate();
+
+                var seeder = scope.ServiceProvider.GetRequiredService<IDataSeeder>();
+                await seeder.InitializeAsync();
+            }
+            #endregion
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -28,8 +28,15 @@ namespace Blog.Service
         {
             var cats = await _repository.GetAllAsync();
             if (cats.Any(x => x.Name == categoryDto.Name)) return null;
+            var mapped = new Category
+            {
+                Name = categoryDto.Name,
+                CreatedAt = DateTime.Now
+            };
+            var create = await _repository.CreateAsync(mapped);
             return new CategoryDto
             {
+                Id= mapped.Id,
                 Name = categoryDto.Name,
                 CreatedAt =  DateTime.Now
             };

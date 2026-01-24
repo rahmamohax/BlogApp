@@ -19,6 +19,8 @@ namespace Blog.Service.Abstraction
         Task<bool> PublishAsync(int id);
         Task<bool> ArchiveAsync(int id);
 
+        //Task<bool> ChangeStatusAsync(int postId, Status newStatus);
+
 
     }
 }

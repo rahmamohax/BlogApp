@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Getting Started with ASP.NET Core",
+    "content": "This post explains the basics of ASP.NET Core.",
+    "categoryId": 1,
+    "status": "Published",
+    "createdAt": "2024-01-05T09:30:00"
+  },
+  {
+    "title": "Why Status Transitions Matter",
+    "content": "Status transitions help enforce business rules.",
+    "categoryId": 3,
+    "status": "Draft",
+    "createdAt": "2024-01-06T10:00:00"
+  },
+  {
+    "title": "Archived Post Example",
+    "content": "This post is no longer active.",
+    "categoryId": 2,
+    "status": "Archived",
+    "createdAt": "2024-01-07T08:45:00"
+  }
+]

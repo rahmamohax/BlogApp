@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Technology",
+    "createdAt": "2024-01-01T10:00:00"
+  },
+  {
+    "name": "AI",
+    "createdAt": "2024-01-02T11:00:00"
+  },
+  {
+    "name": "Backend",
+    "createdAt": "2024-01-03T12:00:00"
+  }
+]

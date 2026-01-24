@@ -1,0 +1,12 @@
+[
+  {
+    "postId": 1,
+    "text": "Very helpful post!",
+    "createdAt": "2024-01-05T10:00:00"
+  },
+  {
+    "postId": 1,
+    "text": "Thanks for the clear explanation.",
+    "createdAt": "2024-01-05T10:30:00"
+  }
+]
