@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Blog.Service\Blog.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\DataSeed\JSONFiles\" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,7 @@
 ﻿using Blog.Domain.Entities;
+using Blog.Domain.Entities.IdentityModule;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Persistence.DbContexts
 {
-    public class BlogDbContext : DbContext
+    public class BlogDbContext : IdentityDbContext<ApplicationUser>
     {
         public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options) { }
 
@@ -21,6 +24,9 @@ namespace Blog.Persistence.DbContexts
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.Entity<ApplicationUser>().ToTable("Users", "Auth");
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles", "Auth");
+            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles", "Auth");
         }
     }
 }
