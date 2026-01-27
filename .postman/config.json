@@ -1,0 +1,15 @@
+{
+  "workspace": {
+    "id": ""
+  },
+  "entities": {
+    "environments": [],
+    "flows": [],
+    "globals": [],
+    "mocks": [],
+    "specs": [
+      "..\\BlogApi\\obj\\Debug\\net8.0\\EndpointInfo\\BlogApi.Web.json"
+    ],
+    "collections": []
+  }
+}

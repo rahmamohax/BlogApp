@@ -1,0 +1,609 @@
+{
+  "info": {
+    "_postman_id": "0c6831f6-f025-419b-a448-6202f2c636d0",
+    "name": "Blog Api project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Get Post by Id",
+          "id": "c46d59f6-a3d8-4f60-8b36-4c5942bbb45b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRAZ21haWwuY29tIiwibmFtZSI6Ik1vaGFtZWRUYXJlayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzY5NjEyODA5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzcvIn0.WOzhEzgV82Ia-1lUn7VBwwDHxprH8YepeJ2WpgcXT-M",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseUrl}}/posts/2",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "2"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "type": "text",
+                  "uuid": "971cd735-f88a-451f-b49f-da2a1e79b157",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Posts",
+          "id": "51a6d0d3-a555-4afa-925c-3fed4c1e9457",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseUrl}}/posts",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Publish Post",
+          "id": "fbd047a5-b594-4b34-a862-14c29ff4def9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRAZ21haWwuY29tIiwibmFtZSI6Ik1vaGFtZWRUYXJlayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzY5NjEyODA5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzcvIn0.WOzhEzgV82Ia-1lUn7VBwwDHxprH8YepeJ2WpgcXT-M",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{BaseUrl}}/posts/1/publish",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "1",
+                "publish"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "type": "text",
+                  "uuid": "971cd735-f88a-451f-b49f-da2a1e79b157",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Archive Post",
+          "id": "402ba75a-8883-4978-9cb5-3a36317c0374",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRAZ21haWwuY29tIiwibmFtZSI6Ik1vaGFtZWRUYXJlayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzY5NjEyODA5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzcvIn0.WOzhEzgV82Ia-1lUn7VBwwDHxprH8YepeJ2WpgcXT-M",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{BaseUrl}}/posts/2/archive",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "2",
+                "archive"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "uuid": "971cd735-f88a-451f-b49f-da2a1e79b157",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Post",
+          "id": "d77bb869-3f2f-4383-bcaf-0e67c8748b28",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"new post\",\r\n  \"content\": \"this is a test to create a new post\",\r\n  \"categoryId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseUrl}}/api/posts",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Post",
+          "id": "065775cf-1a9f-45b8-9678-c4d9d562c6f5",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRAZ21haWwuY29tIiwibmFtZSI6Ik1vaGFtZWRUYXJlayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzY5NjE1NjQ1LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzcvIn0.6-GnpZPTNupbn9hxgMHPzkpp-SzXOCHNOGM4qqCDiXo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Getting Started with ASP.NET Core\",\r\n  \"content\": \"This post explains the basics of ASP.NET Core.\",\r\n  \"categoryId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseUrl}}/posts/2",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "id": "e93870a2-b445-41a7-8bc4-5973abaf5122",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRAZ21haWwuY29tIiwibmFtZSI6Ik1vaGFtZWRUYXJlayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzY5NjE1NjQ1LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzcvIn0.6-GnpZPTNupbn9hxgMHPzkpp-SzXOCHNOGM4qqCDiXo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BaseUrl}}/posts/6",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "922f96fc-25c1-4041-a1ee-717e4cb86519"
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "id": "03537e06-414b-48bc-a107-5367f4cea533",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRAZ21haWwuY29tIiwibmFtZSI6Ik1vaGFtZWRUYXJlayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzY5NjE1NjQ1LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzcvIn0.6-GnpZPTNupbn9hxgMHPzkpp-SzXOCHNOGM4qqCDiXo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhaG1hQGdtYWlsLmNvbSIsIm5hbWUiOiJyYWhtYSIsImV4cCI6MTc2OTYwOTk5NSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEzNy8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyJ9.t4QMO8fU1gVHnBvuoqjFHriwjrcjQAEgV8eYRuKXdSk",
+                "type": "text",
+                "uuid": "783ee6e3-b857-41c0-af42-fd0766f6a39e"
+              }
+            ],
+            "url": {
+              "raw": "{{BaseUrl}}/categories",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Category",
+          "id": "3c2d0587-26b8-4863-bdc4-82016400a46e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Gaming\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseUrl}}/categories",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Category",
+          "id": "d15b23a0-e9ea-4929-8746-2b40cac1dec7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRAZ21haWwuY29tIiwibmFtZSI6Ik1vaGFtZWRUYXJlayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzY5NjE1NjQ1LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzcvIn0.6-GnpZPTNupbn9hxgMHPzkpp-SzXOCHNOGM4qqCDiXo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "uuid": "783ee6e3-b857-41c0-af42-fd0766f6a39e",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{BaseUrl}}/categories/4",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "categories",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "12561f38-9f4e-4c98-a736-edce494adc09"
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Get All Comments",
+          "id": "c5eae87a-6960-4998-87d1-73f7b9c24fd8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRAZ21haWwuY29tIiwibmFtZSI6Ik1vaGFtZWRUYXJlayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzY5NjEyODA5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzcvIn0.WOzhEzgV82Ia-1lUn7VBwwDHxprH8YepeJ2WpgcXT-M",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Gaming\"\r\n}"
+            },
+            "url": {
+              "raw": "{{BaseUrl}}/post/1/comments",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "post",
+                "1",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Comment to Post",
+          "id": "258ebf20-4ba6-4fdc-93eb-9ef5fa77bb3c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRAZ21haWwuY29tIiwibmFtZSI6Ik1vaGFtZWRUYXJlayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzY5NjEyODA5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzcvIn0.WOzhEzgV82Ia-1lUn7VBwwDHxprH8YepeJ2WpgcXT-M",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"test\": \"Amazing🤩\"\r\n}"
+            },
+            "url": {
+              "raw": "{{BaseUrl}}/post/1/comments",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "post",
+                "1",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Comment",
+          "id": "48852242-6709-4922-9e4d-1ed549d538cb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRAZ21haWwuY29tIiwibmFtZSI6Ik1vaGFtZWRUYXJlayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzY5NjE1NjQ1LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTM3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzcvIn0.6-GnpZPTNupbn9hxgMHPzkpp-SzXOCHNOGM4qqCDiXo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{BaseUrl}}/post/3/comment/2",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "post",
+                "3",
+                "comment",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "4d9a710a-da8d-4355-9ae7-57880c56b3a2"
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "id": "ee46308b-1338-493c-b7b4-131984064e1b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"rhma@gmail.com\",\r\n  \"password\": \"Rahma22\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseUrl}}/Authentication/login",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "Authentication",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check Email",
+          "id": "6cb54ff5-6fc9-4561-9358-4ac1c99721a5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "email",
+                "value": "rahma@gmail.com",
+                "type": "text",
+                "uuid": "d2fe8537-3df9-4e2a-ba5a-c7d6bb1dd514"
+              }
+            ],
+            "url": {
+              "raw": "{{BaseUrl}}/Authentication/emailExists",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "Authentication",
+                "emailExists"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current User",
+          "id": "3841072e-b7fa-44b6-aa83-e9f84a65f8e1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseUrl}}/Authentication/CurrentUser",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "Authentication",
+                "CurrentUser"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "id": "878cdf58-65ef-41b6-b61c-80356e68d81f",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "7d9076f7-0a80-45b3-97ae-2b3000122712"
+    }
+  ],
+  "variable": [
+    {
+      "id": "696683df-b9ec-4403-825c-55f54ef68960",
+      "key": "BaseUrl",
+      "value": ""
+    }
+  ]
+}
