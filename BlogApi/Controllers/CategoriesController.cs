@@ -1,6 +1,6 @@
 ﻿using Blog.Service.Abstraction;
 using Blog.Shared.DTOs.CategoryDtos;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApi.Web.Controllers
@@ -24,6 +24,7 @@ namespace BlogApi.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<CategoryDto>> Create(CreateCategoryDto dto)
         {
             var cat = await _categoryService.CreateAsync(dto);
@@ -31,6 +32,7 @@ namespace BlogApi.Web.Controllers
             return Ok(cat);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(int id)
         {

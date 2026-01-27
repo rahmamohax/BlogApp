@@ -1,6 +1,7 @@
 ﻿using Blog.Service.Abstraction;
 using Blog.Shared.DTOs.CategoryDtos;
 using Blog.Shared.DTOs.CommentDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,14 +18,18 @@ namespace BlogApi.Web.Controllers
             _commentService = commentService;
         }
 
-        [HttpGet("posts/{postId}/comments")]
+        [HttpGet("post/{postId}/comments")]
         public async Task<ActionResult<CommentDto>> GetAll( [FromRoute] int postId)
         {
-            var comments = await _commentService.GetAllAsync(postId);
-            return Ok(comments);
+            var result = await _commentService.GetAllAsync(postId);
+            if(!result.Success) 
+                return NotFound(new { errors = result.Errors ?? (result.Error is null ? [] : new[] { result.Error }) });
+
+            return Ok(result.Value);
         }
 
-        [HttpPost("posts/{postId}/comments")]
+        [Authorize]
+        [HttpPost("post/{postId}/comments")]
         public async Task<ActionResult<CommentDto>> Add([FromRoute] int postId,CreateCommentDto dto)
         {
             var result = await _commentService.AddAsync(postId, dto);
@@ -32,11 +37,12 @@ namespace BlogApi.Web.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("posts/comment/{id}")]
-        public async Task<ActionResult<bool>> Delete(int id)
+        [Authorize]
+        [HttpDelete("post/{postId}/comment/{id}")]
+        public async Task<ActionResult<bool>> Delete([FromRoute] int postId,int id)
         {
-            var comment = await _commentService.DeleteAsync(id);
-            if (!comment) return NotFound();
+            var comment = await _commentService.DeleteAsync(postId, id);
+            if (!comment) return NotFound("Can't Delete Comment, Comment is not Found");
             return Ok(comment);
         }
 

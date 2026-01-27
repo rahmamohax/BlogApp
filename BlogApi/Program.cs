@@ -5,7 +5,13 @@ using Blog.Persistence.DbContexts;
 using Blog.Persistence.Repositories;
 using Blog.Service;
 using Blog.Service.Abstraction;
+using BlogApi.Web.Extentions;
+using Blog.Domain.Entities.IdentityModule;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BlogApi
@@ -27,6 +33,21 @@ namespace BlogApi
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("MainConnection"));
             });
 
+            // Identity (required for UserManager/RoleManager in IdentityDataSeeder)
+            builder.Services
+                .AddIdentityCore<ApplicationUser>(options =>
+                {
+                    // Seeder uses "P@ssw0rd"
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireDigit = false;
+                })
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<BlogDbContext>();
+                //.AddDefaultTokenProviders();
+
             builder.Services.AddScoped<IPostRepository, PostRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<ICommentRepository, CommentRepository>();
@@ -34,20 +55,38 @@ namespace BlogApi
             builder.Services.AddScoped<IPostService, PostService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             builder.Services.AddScoped<IDataSeeder, DataSeeder>();
+            builder.Services.AddScoped<IIdentityDataSeeder, IdentityDataSeeder>();
+
+            builder.Services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(opt =>
+            {
+                opt.SaveToken = true;
+                opt.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = builder.Configuration["JwtOptions:Issuer"],
+                    ValidAudience = builder.Configuration["JwtOptions:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtOptions:SecretKey"]!))
+                };
+            });
+
 
             var app = builder.Build();
 
             #region Data Seeding
-            using (var scope = app.Services.CreateScope())
-            {
-                var db = scope.ServiceProvider.GetRequiredService<BlogDbContext>();
-                db.Database.Migrate();
 
-                var seeder = scope.ServiceProvider.GetRequiredService<IDataSeeder>();
-                await seeder.InitializeAsync();
-            }
+            await app.MigrateDatabase();
+            await app.SeedDatabaseAsync();
+            await app.SeedIdentityDataAsync();
+            
             #endregion
 
             // Configure the HTTP request pipeline.
@@ -59,6 +98,7 @@ namespace BlogApi
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

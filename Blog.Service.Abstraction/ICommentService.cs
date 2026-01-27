@@ -1,4 +1,5 @@
-﻿using Blog.Shared.DTOs.CommentDtos;
+﻿using Blog.Shared.CommonResult;
+using Blog.Shared.DTOs.CommentDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace Blog.Service.Abstraction
 {
     public interface ICommentService
     {
-        Task<IEnumerable<CommentDto>> GetAllAsync(int postId);
+        Task<Result<IEnumerable<CommentDto>>> GetAllAsync(int postId);
         Task<CommentDto?> AddAsync(int postId, CreateCommentDto comment);
-        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(int postId, int id);
     }
 }

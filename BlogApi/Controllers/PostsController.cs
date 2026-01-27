@@ -1,5 +1,6 @@
 ﻿using Blog.Service.Abstraction;
 using Blog.Shared.DTOs.PostDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace BlogApi.Web.Controllers
             _postService = postService;
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         public async Task<ActionResult<PostDto>> Create(CreateOrUpdatePostDto postDto)
         {
@@ -24,6 +26,7 @@ namespace BlogApi.Web.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{postId}")]
         public async Task<ActionResult> Update(int postId, CreateOrUpdatePostDto postDto)
         {
@@ -47,6 +50,7 @@ namespace BlogApi.Web.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}/publish")]
         public async Task<ActionResult> Publish(int id)
         {
@@ -55,6 +59,7 @@ namespace BlogApi.Web.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}/archive")]
         public async Task<ActionResult> Archive(int id)
         {
@@ -63,6 +68,7 @@ namespace BlogApi.Web.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(int id)
         {
