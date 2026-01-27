@@ -7,8 +7,11 @@ using Blog.Service;
 using Blog.Service.Abstraction;
 using BlogApi.Web.Extentions;
 using Blog.Domain.Entities.IdentityModule;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BlogApi
@@ -57,6 +60,25 @@ namespace BlogApi
             builder.Services.AddScoped<IDataSeeder, DataSeeder>();
             builder.Services.AddScoped<IIdentityDataSeeder, IdentityDataSeeder>();
 
+            builder.Services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(opt =>
+            {
+                opt.SaveToken = true;
+                opt.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = builder.Configuration["JwtOptions:Issuer"],
+                    ValidAudience = builder.Configuration["JwtOptions:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtOptions:SecretKey"]!))
+                };
+            });
+
+
             var app = builder.Build();
 
             #region Data Seeding
@@ -76,6 +98,7 @@ namespace BlogApi
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
