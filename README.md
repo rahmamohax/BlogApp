@@ -4,6 +4,12 @@ ASP.NET Core **Blog API** built with a layered architecture (Domain → Persiste
 
 ## Features
 
+### Authentication / Identity (JWT)
+- **Register / Login** with ASP.NET Core Identity
+- **JWT bearer tokens** returned by auth endpoints
+- Roles are seeded (`Admin`, `User`) and newly registered users are assigned the `User` role
+- Some endpoints are protected with `[Authorize]` (e.g. `GET /api/categories`, `GET /api/authentication/CurrentUser`)
+
 ### Posts
 - **Create post** (starts as `Draft`)
   - Category must exist
@@ -44,9 +50,10 @@ ASP.NET Core **Blog API** built with a layered architecture (Domain → Persiste
 ### Solution layout
 - **`ApplicationLayer/`** (`Blog.Domain`)
   - Entities: `Post`, `Category`, `Comment`, base `BaseEntity`
-  - Contracts (repository interfaces): `IPostRepository`, `ICategoryRepository`, `ICommentRepository`, `IDataSeeder`
+  - Identity entity: `ApplicationUser`
+  - Contracts (repository + seed interfaces): `IPostRepository`, `ICategoryRepository`, `ICommentRepository`, `IDataSeeder`, `IIdentityDataSeeder`
 - **`Blog.Persistence/`**
-  - EF Core `BlogDbContext`
+  - EF Core `BlogDbContext` (includes Identity tables via `IdentityDbContext<ApplicationUser>`)
   - Entity configurations (`Data/Configurations/*Config.cs`)
   - Repositories (`Repositories/*Repository.cs`)
   - Migrations (`Data/Migrations`)
@@ -54,6 +61,7 @@ ASP.NET Core **Blog API** built with a layered architecture (Domain → Persiste
 - **`Blog.Service/`** + **`Blog.Service.Abstraction/`**
   - Business logic & rules (services)
   - DTO mapping
+  - JWT token creation in `AuthenticationService`
 - **`BlogApi/`** (`BlogApi.Web`)
   - Controllers and DI wiring
   - Swagger enabled in Development
@@ -73,6 +81,12 @@ Located in `Blog.Shared`:
   - `HasPostsAsync(categoryId)` uses an efficient `AnyAsync` query against `Posts`
 
 ## API Endpoints
+
+### Authentication (`/api/authentication`)
+- `POST /api/authentication/register` — register user (returns JWT)
+- `POST /api/authentication/login` — login (returns JWT)
+- `GET /api/authentication/emailExists?email=...` — check if email is registered
+- `GET /api/authentication/CurrentUser` — get current user (requires `Authorization: Bearer <token>`)
 
 ### Posts (`/api/posts`)
 - `POST /api/posts` — create post
@@ -96,8 +110,9 @@ Located in `Blog.Shared`:
 ## Data Seeding
 
 On startup, the app:
-- runs `db.Database.Migrate()`
-- runs `IDataSeeder.InitializeAsync()`
+- applies migrations (`MigrateDatabase`)
+- seeds blog data from JSON (`IDataSeeder.InitializeAsync()`)
+- seeds Identity roles/users (`IIdentityDataSeeder.InitializerAsync()`)
 
 Seed JSON files are in:
 - `Blog.Persistence/Data/DataSeed/JSONFiles/`
@@ -116,4 +131,8 @@ dotnet run --project BlogApi/BlogApi.Web.csproj
 ```
 
 Swagger UI launches at `https://localhost:7200/swagger` (see `BlogApi/Properties/launchSettings.json`).
+
+### Auth in Postman / clients
+- Set header: `Authorization: Bearer <token>`
+- JWT settings live in `BlogApi/appsettings.json` under `JWTOptions` (SecretKey/Issuer/Audience).
 
