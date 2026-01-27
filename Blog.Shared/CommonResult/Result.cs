@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blog.Shared.ComminResult;
+namespace Blog.Shared.CommonResult;
 
 public record Result<T>(
     bool Success,

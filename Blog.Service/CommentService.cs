@@ -1,6 +1,7 @@
 ﻿using Blog.Domain.Contracts;
 using Blog.Domain.Entities;
 using Blog.Service.Abstraction;
+using Blog.Shared.CommonResult;
 using Blog.Shared.DTOs.CommentDtos;
 
 
@@ -38,22 +39,39 @@ namespace Blog.Service
             };
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int postId, int id)
         {
+            var post = await _postRepository.GetByIdAsync(postId);
+
+            if (post is null) return false;
+
+            if(post.Status == Status.Draft || post.Status == Status.Archived) return false;
+
             var comment = await _repository.GetByIdAsync(id);
+
             if (comment is null) return false;
+
             return await _repository.DeleteAsync(comment);
         }
 
-        public async Task<IEnumerable<CommentDto>> GetAllAsync(int postId)
+        public async Task<Result<IEnumerable<CommentDto>>> GetAllAsync(int postId)
         {
+            var post = await _postRepository.GetByIdAsync(postId);
+            if (post is null) return Result.Fail<IEnumerable<CommentDto>>("post does not exist");
+
+            if (post.Status == Status.Draft || post.Status == Status.Archived)
+                return Result.Fail<IEnumerable<CommentDto>>($"post not found");
+
+
             var comments = await _repository.GetAllAsync(postId);
-            if (comments is null)  return Enumerable.Empty<CommentDto>();
-            return comments.Select(x=> new CommentDto
+            if (comments is null)  return Result.Ok(Enumerable.Empty<CommentDto>());
+            var returnComm = comments.Select(x=> new CommentDto
             {
                 Id = x.Id,
                 Text = x.Text,
             });
+
+            return Result.Ok(returnComm);
         }
     }
 }

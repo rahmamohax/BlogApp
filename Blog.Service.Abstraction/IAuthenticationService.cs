@@ -1,6 +1,6 @@
 
 
-using Blog.Shared.ComminResult;
+using Blog.Shared.CommonResult;
 using Blog.Shared.DTOs.IdentityDtos;
 
 namespace Blog.Service.Abstraction
@@ -9,5 +9,7 @@ namespace Blog.Service.Abstraction
     {
         Task<Result<UserDto>> LoginAsync(LoginDto login);
         Task<Result<UserDto>> RegisterAsync(RegisterDto register);
+        Task<bool> EmailExistsAsync(string email);
+        Task<Result<UserDto>> GetUserByEmailAsync(string email);
     }
 }

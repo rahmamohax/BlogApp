@@ -2,9 +2,11 @@ using Blog.Domain.Contracts;
 using Blog.Domain.Entities;
 using Blog.Service.Abstraction;
 using Blog.Shared.DTOs.CategoryDtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Blog.Service
 {
+    
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _repository;
@@ -13,6 +15,7 @@ namespace Blog.Service
         {
             _repository = repository;
         }
+
         public async Task<IEnumerable<CategoryDto>> GetAllAsync()
         {
             var cats = await _repository.GetAllAsync();
